@@ -15,11 +15,27 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
+    const statusCode = exception.getStatus();
+    const message = exception.getResponse() as {
+      key: string;
+      args: Record<string, unknown>;
+      message: string;
+    };
 
-    response.status(500).json({
-      statusCode: 500,
+    this.logger.error(
+      `An error has been encountered while processing application code. Please check the recent log for proper trace. Status code = ${statusCode}, message = ${JSON.stringify(
+        message,
+      )}`,
+    );
+    this.logger.debug(
+      `Exception encountered in application code = ${exception.name}, Stack trace = ${exception.stack}`,
+    );
+
+    response.status(statusCode).json({
+      statusCode: statusCode,
       timestamp: new Date().toISOString(),
       path: request.url,
+      ...message,
     });
   }
 }

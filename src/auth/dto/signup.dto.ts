@@ -5,7 +5,7 @@ export class SignUpDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty()
-  readonly name: string;
+  readonly username: string;
 
   @IsNotEmpty()
   @IsEmail({}, { message: 'Please enter correct email' })
