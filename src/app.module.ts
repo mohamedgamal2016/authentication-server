@@ -1,10 +1,20 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module, Logger } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    JwtModule.register({
+      secret: 'your-secret-key', // Replace with your own secret key
+      signOptions: { expiresIn: '1h' }, // Token expiration time
+    }),
+    AuthModule,
+  ],
 })
-export class AppModule {}
+export class AppModule {
+  private readonly logger = new Logger(AppModule.name);
+
+  constructor() {
+    this.logger.log('Application initialized.');
+  }
+}
