@@ -5,8 +5,7 @@ import {
   HttpException,
   Logger,
 } from '@nestjs/common';
-import _ from 'lodash';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Catch(HttpException)
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -15,24 +14,12 @@ export class AllExceptionsFilter implements ExceptionFilter {
   async catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const statusCode = exception.getStatus();
+    const request = ctx.getRequest<Request>();
 
-    const message = exception.getResponse() as {
-      key: string;
-      args: Record<string, unknown>;
-      message: string;
-    };
-
-    this.logger.error(
-      `An error has been encountered while processing application code. Please check the recent log for proper trace. Status code = ${statusCode}, message = ${JSON.stringify(
-        message,
-      )}`,
-    );
-    this.logger.debug(
-      `Exception encountered in application code = ${exception.name}, Stack trace = ${exception.stack}`,
-    );
-    response
-      .status(statusCode)
-      .send(_.omit({ ...message, code: statusCode }, ['statusCode']));
+    response.status(500).json({
+      statusCode: 500,
+      timestamp: new Date().toISOString(),
+      path: request.url,
+    });
   }
 }
