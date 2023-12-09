@@ -48,3 +48,6 @@ $ npm run start:prod
 ```
 ## Or just use docker to install and run
 docker-compose up
+
+## Docs
+Open [http://localhost:5000/api/docs](http://localhost:5000/api/docs) to view swagger the browser.
