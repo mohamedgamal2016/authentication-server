@@ -41,7 +41,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Easy Generator')
     .setDescription('Easy Generator Authentication Service')
-    .setVersion('3.0')
+    .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/api-docs', app, document);
