@@ -24,7 +24,27 @@
 
 ## Description
 
-Easy Generator Authentication server.
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation and Running the app
+## Manual Installation
+
+```bash
+$ npm install
+```
+
+## Running the app
+
+Add .env file and put variables listed in .env-sample file
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+## Or just use docker to install and run
 docker-compose up
