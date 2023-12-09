@@ -1,13 +1,14 @@
 import { Module, Logger } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
-
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
-    JwtModule.register({
-      secret: 'your-secret-key', // Replace with your own secret key
-      signOptions: { expiresIn: '1h' }, // Token expiration time
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
     }),
+    MongooseModule.forRoot(process.env.DB_URI),
     AuthModule,
   ],
 })
