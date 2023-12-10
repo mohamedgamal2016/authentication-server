@@ -3,9 +3,9 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { JwtService } from '@nestjs/jwt';
-import { User } from './schema/user.schema';
-import { LoginDto } from './dto/login.dto';
-import { SignUpDto } from './dto/signup.dto';
+import { User } from '../schema/user.schema';
+import { LoginDto } from '../dto/login.dto';
+import { SignUpDto } from '../dto/signup.dto';
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 
 describe('AuthController', () => {

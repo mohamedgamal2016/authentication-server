@@ -4,9 +4,9 @@ import { getModelToken } from '@nestjs/mongoose';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { BadRequestException } from '@nestjs/common';
-import { User } from './schema/user.schema';
-import { LoginDto } from './dto/login.dto';
-import { SignUpDto } from './dto/signup.dto';
+import { User } from '../schema/user.schema';
+import { LoginDto } from '../dto/login.dto';
+import { SignUpDto } from '../dto/signup.dto';
 
 describe('AuthService', () => {
   let service: AuthService;
