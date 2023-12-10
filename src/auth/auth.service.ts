@@ -27,6 +27,12 @@ export class AuthService {
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
+      const isUserExisted = await this.userModel.findOne({ email });
+      if (isUserExisted)
+        throw new BadRequestException(
+          'user with this email already registered.',
+        );
+
       const user = await this.userModel.create({
         username,
         email,
