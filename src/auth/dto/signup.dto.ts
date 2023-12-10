@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
 
 export class SignUpDto {
   @IsNotEmpty()
@@ -14,7 +14,10 @@ export class SignUpDto {
 
   @IsNotEmpty()
   @IsString()
-  @MinLength(6)
+  @Matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, {
+    message:
+      'Password must contain at least 1 letter, 1 number, 1 special character, and be 8 characters long.',
+  })
   @ApiProperty()
   readonly password: string;
 }
