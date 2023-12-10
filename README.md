@@ -50,4 +50,4 @@ $ npm run start:prod
 docker-compose up
 
 ## Docs
-Open [http://localhost:5000/api/docs](http://localhost:5000/api/docs) to view swagger the browser.
+Open [http://localhost:5000/api/docs](http://localhost:5000/api/docs) to view swagger in the browser.
